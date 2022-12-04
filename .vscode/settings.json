@@ -1,0 +1,5 @@
+{
+  "autoHide.autoHidePanel": false,
+  "deno.enable": true,
+  "deno.unstable": true
+}
