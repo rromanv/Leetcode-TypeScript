@@ -1,44 +1,40 @@
 const fourSum = (numbers: number[], target: number): number[][] => {
   const results: number[][] = []
-  const uniqueCombinations = new Set()
-
   if (numbers.length < 4) return results
-
-  let [idx1, idx2, idx3, idx4] = [0, 1, 2, numbers.length - 1]
 
   numbers.sort((a, b) => a - b)
 
-  while (idx1 < idx2) {
-    while (idx2 < idx3) {
-      while (idx3 < idx4) {
-        while (idx4 > idx3) {
-          const combination = [
-            numbers[idx1],
-            numbers[idx2],
-            numbers[idx3],
-            numbers[idx4],
-          ]
-          if (!uniqueCombinations.has(combination.join(','))) {
-            uniqueCombinations.add(combination.join(','))
-            const sum = combination.reduce((a, c) => a + c, 0)
-            if (sum <= target) {
-              if (sum === target) {
-                results.push(combination)
-              }
-              break
-            }
+  const uniqueCombinations = new Set()
+
+  for (let idx1 = 0; idx1 < numbers.length - 3; idx1++) {
+    for (let idx2 = idx1 + 1; idx2 < numbers.length - 2; idx2++) {
+      let left = idx2 + 1
+      let right = numbers.length - 1
+
+      while (left < right) {
+        const sum =
+          numbers[idx1] + numbers[idx2] + numbers[left] + numbers[right]
+
+        if (sum < target) {
+          left++
+        } else if (sum > target) {
+          right--
+        } else {
+          const combination = `${numbers[idx1]}${numbers[idx2]}${numbers[left]}${numbers[right]}`
+          if (!uniqueCombinations.has(combination)) {
+            results.push([
+              numbers[idx1],
+              numbers[idx2],
+              numbers[left],
+              numbers[right],
+            ])
+            uniqueCombinations.add(combination)
           }
-          idx4--
+          left++
+          right--
         }
-        idx4 = numbers.length - 1
-        idx3++
       }
-      idx2++
-      idx3 = idx4 - idx2 > 1 ? idx2 + 1 : idx3
     }
-    idx1++
-    idx2 = idx3 - idx1 > 1 ? idx1 + 1 : idx2
-    idx3 = idx4 - idx2 > 1 ? idx2 + 1 : idx3
   }
   return results
 }
