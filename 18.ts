@@ -1,3 +1,5 @@
+// 18. 4Sum
+
 const fourSum = (numbers: number[], target: number): number[][] => {
   const results: number[][] = []
   if (numbers.length < 4) return results
@@ -12,15 +14,17 @@ const fourSum = (numbers: number[], target: number): number[][] => {
       let right = numbers.length - 1
 
       while (left < right) {
-        const sum =
-          numbers[idx1] + numbers[idx2] + numbers[left] + numbers[right]
+        const sum = numbers[idx1] + numbers[idx2] + numbers[left] +
+          numbers[right]
 
         if (sum < target) {
           left++
         } else if (sum > target) {
           right--
         } else {
-          const combination = `${numbers[idx1]}${numbers[idx2]}${numbers[left]}${numbers[right]}`
+          const combination = `${numbers[idx1]}${numbers[idx2]}${
+            numbers[left]
+          }${numbers[right]}`
           if (!uniqueCombinations.has(combination)) {
             results.push([
               numbers[idx1],
@@ -43,13 +47,94 @@ console.log(fourSum([2, 2, 2, 2, 2], 8))
 console.log(
   fourSum(
     [
-      -500, -499, -486, -474, -470, -462, -426, -426, -411, -409, -366, -361,
-      -359, -355, -350, -349, -303, -297, -255, -238, -222, -215, -203, -201,
-      -198, -193, -193, -187, -179, -156, -150, -139, -99, -93, -87, -58, -54,
-      -8, -2, 1, 5, 6, 8, 9, 15, 31, 37, 48, 50, 95, 128, 181, 201, 206, 235,
-      244, 251, 272, 285, 287, 289, 305, 308, 338, 357, 367, 386, 391, 392, 395,
-      395, 402, 410, 449, 458, 466, 478, 485, 488,
+      -500,
+      -499,
+      -486,
+      -474,
+      -470,
+      -462,
+      -426,
+      -426,
+      -411,
+      -409,
+      -366,
+      -361,
+      -359,
+      -355,
+      -350,
+      -349,
+      -303,
+      -297,
+      -255,
+      -238,
+      -222,
+      -215,
+      -203,
+      -201,
+      -198,
+      -193,
+      -193,
+      -187,
+      -179,
+      -156,
+      -150,
+      -139,
+      -99,
+      -93,
+      -87,
+      -58,
+      -54,
+      -8,
+      -2,
+      1,
+      5,
+      6,
+      8,
+      9,
+      15,
+      31,
+      37,
+      48,
+      50,
+      95,
+      128,
+      181,
+      201,
+      206,
+      235,
+      244,
+      251,
+      272,
+      285,
+      287,
+      289,
+      305,
+      308,
+      338,
+      357,
+      367,
+      386,
+      391,
+      392,
+      395,
+      395,
+      402,
+      410,
+      449,
+      458,
+      466,
+      478,
+      485,
+      488,
     ],
     -2701,
   ),
 )
+
+const regexCountOpenSquareBrackets = (s: string) => {
+  const regex = /\[/g
+  const matches = s.match(regex)
+  return matches ? matches.length : 0
+}
+
+console.log(regexCountOpenSquareBrackets('[[[[}}DF}ASGFDA}FAG}}}]]]'))

@@ -26,8 +26,9 @@ const maxNumberOfFamilies = (n: number, reservedSeats: number[][]): number => {
       middle === (middle | seats) &&
       left !== leftCheck &&
       right !== rightCheck
-    )
+    ) {
       maxArrangements++
+    }
   }
 
   maxArrangements += (n - rows.size) * 2
